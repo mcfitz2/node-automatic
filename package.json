@@ -1,0 +1,24 @@
+{
+  "name": "node-automatic",
+  "version": "0.0.1",
+  "description": "API wrapper for the Automatic app",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/blainsmith/node-automatic.git"
+  },
+  "keywords": [
+    "automatic",
+    "cars",
+    "trucks",
+    "api"
+  ],
+  "author": "Blain Smith <rebelgeek@blainsmith.com>",
+  "bugs": {
+    "url": "https://github.com/blainsmith/node-automatic/issues"
+  },
+  "homepage": "https://github.com/blainsmith/node-automatic",
+  "dependencies": {
+    "request": "~2.27.0"
+  }
+}
