@@ -1,5 +1,5 @@
 {
-  "name": "node-automatic",
+  "name": "automatic",
   "version": "0.0.1",
   "description": "API wrapper for the Automatic app",
   "main": "index.js",
