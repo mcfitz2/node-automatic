@@ -95,27 +95,6 @@ var automatic = function(config){
           }
         },
         callback);
-    },
-
-    parkedLocations: function(options, callback){
-      var endpoint = config.host + config.apiVersion + '/car/parked_locations';
-
-      var data = JSON.stringify({
-        vin: options.vin
-      });
-      
-      request({
-        method: 'POST',
-        uri: endpoint,
-        auth: {
-            user: config.username,
-            pass: config.password
-          },
-        form: {
-          data: data
-          }
-        }, 
-        callback);
     }
   };
 
