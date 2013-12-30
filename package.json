@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/blainsmith/node-automatic",
   "dependencies": {
-    "request": "~2.27.0"
+    "request": "~2.27.0",
+    "underscore": "~1.5.2"
   }
 }
