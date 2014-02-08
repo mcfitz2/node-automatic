@@ -1,7 +1,5 @@
 # Automatic API wrapper for Node.js
 
-[![NPM](https://nodei.co/npm/automatic.png?downloads=true&stars=true)](https://nodei.co/npm/automatic/)
-
 API wrapper for the Automatic app
 
 ## Setup, Usage, and Tests
