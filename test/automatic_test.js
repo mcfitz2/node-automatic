@@ -36,9 +36,13 @@ exports.automatic = {
   },
   'verifies the token': function(test){
     automatic.token = {};
-    automatic.token.expires_in = new Date().getTime() + 10000;
+    automatic.token.expires_in = 10; // Valid 10 seconds
 
+    automatic.lastTokenRequestedAt = new Date().getTime() - 5 * 1000; // Requested 5 seconds ago
     test.ok(automatic.isTokenValid(), 'Token is valid');
+
+    automatic.lastTokenRequestedAt = new Date().getTime() - 10 * 1000; // Requested 10 seconds ago
+    test.ok(!automatic.isTokenValid(), 'Token has expired');
 
     test.done();
   }
