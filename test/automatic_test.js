@@ -5,7 +5,7 @@ var authUrl;
 
 exports.automatic = {
   setUp: function(done){
-    authUrl = automatic.authorizeUrl('SCOPE_1,SCOPE_2,SCOPE_3', 'STATE');
+    authUrl = automatic.authorizeUrl(['SCOPE_1','SCOPE_2','SCOPE_3'], 'STATE');
 
     done();
   },
@@ -16,7 +16,7 @@ exports.automatic = {
     test.done();
   },
   'configures the authorization url to redirect to': function(test){
-    var expectedAuthUrl = 'https://www.automatic.com/oauth/authorize?client_id=CLIENT_ID&scope=SCOPE_1,SCOPE_2,SCOPE_3&state=STATE&response_type=code';
+    var expectedAuthUrl = 'https://www.automatic.com/oauth/authorize?client_id=CLIENT_ID&scope=SCOPE_1%20SCOPE_2%20SCOPE_3&state=STATE&response_type=code';
 
     test.equal(authUrl, expectedAuthUrl, 'Auth URL correct');
 

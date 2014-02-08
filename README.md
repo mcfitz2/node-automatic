@@ -18,11 +18,11 @@ The nodeunit tests can be run with Grunt.
 
 Any `callback` will be the same callback you would get from using [request](https://github.com/mikeal/request).
 
-### authorizeUrl(scope, state)
+### authorizeUrl(scopes, state)
 
 This method will construct the correct URL you should redirect your users to to grant your app authorization.
 
-* `scope` - comma delimited list of [scopes](https://www.automatic.com/developer/documentation/#scopes) to grant access to
+* `scopes` - array of [scopes](https://www.automatic.com/developer/documentation/#scopes) to grant access to
 * `state` - an unguessable random string used to protect against cross-site request forgery attacks
 
 ### validateAuthorization(code, state)
