@@ -4,60 +4,63 @@
 
 API wrapper for the Automatic app
 
-## Basic Usage
+## Setup, Usage, and Tests
 
-    var automatic = require('automatic')({
-      username: 'API_USERNAME',
-      password: 'API_PASSWORD'
-    });
+There is a sample Express app in the root of this repo. Just fire it up and check it out.
 
-    automatic.cars(function(error, response, body){
-      if (!error && response.statusCode == 200) {
-        console.log(body); // Print the JSON response from the Automatic API
-      }
-    });
+    node index.js
 
-## Configuration
+The nodeunit tests can be run with Grunt.
 
-Right now the Automatic API uses HTTP Basic Auth for access to make calls. Follow the instructions on the PHP port of [finding your Automatic API credentials](https://github.com/adamwulf/automatic-php-api/wiki).
-
-Once you get your username and password you can pass those into to the `require` call.
-
-    var automatic = require('automatic')({
-      username: 'API_USERNAME',
-      password: 'API_PASSWORD'
-    });
+    grunt test
 
 ## Methods
 
-Since this module depends on [request](https://github.com/mikeal/request), the callback is the same callback you would get from using requst.
+Any `callback` will be the same callback you would get from using [request](https://github.com/mikeal/request).
 
-    function(error, response, body){
+### authorizeUrl(scope, state)
 
-    }
+This method will construct the correct URL you should redirect your users to to grant your app authorization.
 
-### preferences(callback)
+* `scope` - comma delimited list of [scopes](https://www.automatic.com/developer/documentation/#scopes) to grant access to
+* `state` - an unguessable random string used to protect against cross-site request forgery attacks
 
-This method will return preference and account information, including name, timezone, audio preferences, vin numbers, etc.
+### validateAuthorization(code, state)
 
-### linkInfo(callback)
+This method will set the code from a valid authorization. Throws an `Error` if the states do not match.
 
-This method will return information about the Automatic links on your account.
+* `code` - the `code` from the GET parameter on redirection back from Automatic
+* `state` - the same `state` used in `authorizeUrl()`
 
-### cars(callback)
+### requestToken(callback)
 
-This will return detailed information about the cars in your account.
+This method request the OAuth token from Automatic needed for all REST calls.
+
+### refreshToken(callback)
+
+This method refreshes the OAuth token with the current token.
+
+### isTokenValid()
+
+Returns whether the current token has expired or not.
 
 ### trips(options, callback)
 
-Returns all trips that are between the start and end timestamps. The `options` object must contain:
+Returns a single trip specified by `id` OR multiple trips based on `page` and `per_page` values. The `options` object must contain:
 
-* `startTime` - time in milliseconds
-* `endTime` - time in milliseconds
+* `id` - specific trip id
 
-### scores(options, callback)
+```javascript
+// returns trip with ID = 5
+var trip = automatic.trips({ id: 5 }, function(err, res, body){ ... });
+```
 
-Returns all trips that are between the start and end timestamps. The `options` object must contain:
+OR
 
-* `startTime` - time in milliseconds
-* `endTime` - time in milliseconds
+* `page` - page number (defaults to 1)
+* `per_page` - number of trip to return per page (defaults to 100)
+
+```javascript
+// return page 5 with 10 trips
+var trips = automatic.trips({ page: 5, per_page: 10 }, function(err, res, body){ ... });
+```
