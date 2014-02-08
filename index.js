@@ -1,103 +1,28 @@
-var _ = require('underscore');
-    request = require('request');
+var automatic = require('./lib/automatic').createClient('CLIENT_ID', 'CLIENT_SECRET');
+var express = require('express');
+var app = express();
 
-var automatic = function(config){
+app.get('/', function(req, res) {
+  res.redirect(automatic.authorizeUrl('scope:trip:summary', 'SecretStateString'));  
+});
 
-  var defaultConfig = {
-    host: 'https://secure.milesense.com',
-    apiVersion: '/v3'
-  };
+app.get('/redirect-url', function(req, res) {
+  try {
+    automatic.validateAuthorization(req.query.code, 'SecretStateString');
+    automatic.requestToken(function(error, response, body) {
+      res.redirect('/dump-trips');
+    });
+  } catch(err) {
+    res.send('Go directly to jail. Do not pass go. Do not collect $200.');
+  }
+});
 
-  var config = _.extend(config, defaultConfig);
-
-  return {
-    preferences: function(callback){
-      var endpoint = config.host + config.apiVersion + '/user/preferences';
-      
-      request({
-        method: 'GET',
-        uri: endpoint,
-        auth: {
-            user: config.username,
-            pass: config.password
-          }
-        }, 
-        callback);
-    },
-
-    linkInfo: function(callback){
-      var endpoint = config.host + config.apiVersion + '/link/info';
-      
-      request({
-        method: 'GET',
-        uri: endpoint,
-        auth: {
-            user: config.username,
-            pass: config.password
-          }
-        }, 
-        callback);
-    },
-
-    cars: function(callback){
-      var endpoint = config.host + config.apiVersion + '/car';
-      
-      request({
-        method: 'GET',
-        uri: endpoint,
-        auth: {
-            user: config.username,
-            pass: config.password
-          }
-        }, 
-        callback);
-    },
-
-    trips: function(options, callback){
-      var endpoint = config.host + config.apiVersion + '/user/trips';
-
-      var data = JSON.stringify({
-        start_time: options.startTime,
-        end_time: options.endTime
-      });
-      
-      request({
-        method: 'POST',
-        uri: endpoint,
-        auth: {
-            user: config.username,
-            pass: config.password
-          },
-        form: {
-          data: data
-          }
-        }, 
-        callback);
-    },
-
-    scores: function(options, callback){
-      var endpoint = config.host + config.apiVersion + '/user/scores';
-      
-      var data = JSON.stringify({
-        start_time: options.startTime,
-        end_time: options.endTime
-      });
-
-      request({
-        method: 'POST',
-        uri: endpoint,
-        auth: {
-            user: config.username,
-            pass: config.password
-          },
-        form: {
-          data: data
-          }
-        },
-        callback);
+app.get('/dump-trips', function(req, res) {
+  automatic.trips(function(error, response, body){
+    if (!error && response.statusCode == 200) {
+      res.send(body);
     }
-  };
+  });
+});
 
-};
-
-module.exports = automatic;
+app.listen(3000);
