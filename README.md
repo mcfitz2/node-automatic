@@ -50,7 +50,9 @@ Returns a single trip specified by `id` OR multiple trips based on `page` and `p
 
 ```javascript
 // returns trip with ID = 5
-var trip = automatic.trips({ id: 5 }, function(err, res, body){ ... });
+automatic.trips({ id: 5 }, function(err, res, body){
+  var trips = body;
+});
 ```
 
 OR
@@ -60,5 +62,7 @@ OR
 
 ```javascript
 // return page 5 with 10 trips
-var trips = automatic.trips({ page: 5, per_page: 10 }, function(err, res, body){ ... });
+automatic.trips({ page: 5, per_page: 10 }, function(err, res, body){
+  var trips = body;
+});
 ```

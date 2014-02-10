@@ -1,6 +1,6 @@
 {
   "name": "automatic",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "main": "lib/automatic.js",
   "description": "API wrapper for the Automatic app",
   "homepage": "https://github.com/blainsmith/node-automatic",
