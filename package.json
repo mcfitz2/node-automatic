@@ -1,8 +1,8 @@
 {
   "name": "automatic",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "main": "lib/automatic.js",
-  "description": "API wrapper for the Automatic app",
+  "description": "Automatic API Node.js module",
   "homepage": "https://github.com/blainsmith/node-automatic",
   "bugs": "https://github.com/blainsmith/node-automatic/issues",
   "author": {
@@ -18,6 +18,15 @@
     {
       "type": "MIT"
     }
+  ],
+  "keywords": [
+    "obd",
+    "ecu",
+    "car",
+    "vehicle",
+    "automatic",
+    "on-board diagnostics",
+    "api"
   ],
   "devDependencies": {
     "grunt-contrib-jshint": "~0.7.0",

@@ -1,6 +1,6 @@
-# Automatic API wrapper for Node.js
+# Automatic API Node.js module
 
-API wrapper for the Automatic app
+Used to access the [Automatic API](https://www.automatic.com/developer/).
 
 ## Setup, Usage, and Tests
 
