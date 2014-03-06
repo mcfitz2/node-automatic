@@ -1,6 +1,6 @@
 {
   "name": "automatic",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "main": "lib/automatic.js",
   "description": "Automatic API Node.js module",
   "homepage": "https://github.com/blainsmith/node-automatic",
@@ -38,6 +38,6 @@
   },
   "dependencies": {
     "underscore": "~1.5.2",
-    "request": "~2.31.0"
+    "needle": "^0.6.6"
   }
 }
