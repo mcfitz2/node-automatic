@@ -3,7 +3,7 @@ var express = require('express');
 var app = express();
 
 app.get('/', function(req, res) {
-  res.redirect(automatic.authorizeUrl('scope:trip:summary', 'SecretStateString'));  
+  res.redirect(automatic.authorizeUrl(['scope:trip:summary'], 'SecretStateString'));  
 });
 
 app.get('/redirect-url', function(req, res) {
